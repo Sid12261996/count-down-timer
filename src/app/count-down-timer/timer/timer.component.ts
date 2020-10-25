@@ -18,14 +18,22 @@ export class TimerComponent implements OnInit {
   ngOnInit() {
   }
 
-  startTimer(timeInMins: string) {
-
-    if (this.outTimeSecs === 0) {
-      this.outTimeSecs = parseInt(timeInMins, 0) * 60;
-      this.inputTimeInMinutes = this.outTimeSecs;
+  startTimer(timeInMins: string): void {
+    try {
+      if (this.outTimeSecs === 0) {
+        this.outTimeSecs = parseInt(timeInMins, 0) * 60;
+        if (isNaN(this.outTimeSecs)) {
+          this.outTimeSecs = 0;
+          throw 'Please enter a valid integer for minutes';
+        }
+        this.inputTimeInMinutes = this.outTimeSecs;
+      }
+      this.clearInterval();
+      this.startCountDown();
+    } catch (e) {
+      alert(e);
     }
-    this.clearInterval();
-    this.startCountDown();
+
   }
 
   startCountDown() {
