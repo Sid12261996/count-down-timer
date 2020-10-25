@@ -1,0 +1,26 @@
+<div class="container ">
+  <div class="row wrapper text-center">
+    <mat-card class="card-wrapper">
+      <mat-card-title>Count down Timer</mat-card-title>
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <mat-label>Enter the Time in minutes</mat-label>
+          <input matInput placeholder="Time in minutes" type="number" #inputTime
+                 autocomplete="off">
+        </mat-form-field>
+        <mat-card-title>
+          {{outTimeSecs|formatTimer}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+
+        </mat-card-subtitle>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="startTimer(inputTime.value)">Start</button>
+        <button mat-raised-button color="primary" (click)="clearInterval()">Stop</button>
+        <button mat-raised-button color="primary" (click)="resetTimer()">Reset</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
