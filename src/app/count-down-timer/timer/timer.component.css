@@ -6,8 +6,10 @@
 }
 
 .card-wrapper {
-  /*width: 50%;*/
-  /*height: 50%;*/
   padding: 50px;
   background-color: #fbf7f0;
+}
+
+.take-full-height {
+  height: 100%;
 }
