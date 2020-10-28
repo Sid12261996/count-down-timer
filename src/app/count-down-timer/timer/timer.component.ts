@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {State} from '../../state/root.reducer';
+import * as timerAction from '../state/timer.action';
 
 @Component({
   selector: 'app-timer',
@@ -12,7 +15,7 @@ export class TimerComponent implements OnInit {
   intervalInstance: any;
 
 
-  constructor() {
+  constructor(private store: Store<State>) {
   }
 
   ngOnInit() {
@@ -30,6 +33,7 @@ export class TimerComponent implements OnInit {
       }
       this.clearInterval();
       this.startCountDown();
+
     } catch (e) {
       alert(e);
     }
@@ -37,8 +41,10 @@ export class TimerComponent implements OnInit {
   }
 
   startCountDown() {
+    this.store.dispatch(new timerAction.StartTimer({currentCountDown: this.outTimeSecs, userInput: this.inputTimeInMinutes}));
     this.intervalInstance = setInterval(() => {
       --this.outTimeSecs;
+      this.store.dispatch(new timerAction.RunTimer(this.outTimeSecs));
       if (this.outTimeSecs === -1) {
         this.resetTimer('Count down finished counting till 0');
       }
@@ -57,6 +63,7 @@ export class TimerComponent implements OnInit {
     this.outTimeSecs = 0;
     this.inputTimeInMinutes = 0;
     this.clearInterval(true, alertText);
+    this.store.dispatch(new timerAction.ResetTimer());
   }
 
   get progress(): number {

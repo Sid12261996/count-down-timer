@@ -4,6 +4,8 @@ import {TimerComponent} from './timer/timer.component';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule, MatCardModule, MatInputModule, MatProgressBarModule} from '@angular/material';
 import {FormatCounterPipes} from './pipes/format-counter.pipes';
+import {StoreModule} from '@ngrx/store';
+import {reducer} from './state/timer.reducer';
 
 
 @NgModule({
@@ -18,6 +20,7 @@ import {FormatCounterPipes} from './pipes/format-counter.pipes';
     MatInputModule,
     MatButtonModule,
     MatProgressBarModule,
+    StoreModule.forFeature('timer', reducer),
   ]
 })
 export class CountDownTimerModule {
